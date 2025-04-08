@@ -30,3 +30,10 @@ class TaskManager:
                     self.TaskList.remove(Task)
                     break
                 
+        def viewTasks(self,name):
+            if not self.TaskList 
+                print("no Tasks found")
+            else:
+                for task in self.TaskList:
+                    if task.name == name:
+                        print(task)
