@@ -31,7 +31,7 @@ class TaskManager:
                     break
                 
         def viewTasks(self,name):
-            if not self.TaskList 
+            if not self.TaskList:
                 print("no Tasks found")
             else:
                 for task in self.TaskList:
