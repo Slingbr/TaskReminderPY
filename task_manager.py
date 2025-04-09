@@ -7,8 +7,8 @@ class TaskManager:
         self.due_date = due_date
         self.reminder_time = reminder_time
         self.description = description
-        self.priority = priority  # Priority: Low, Medium, High
-        self.status = status  # Status: Pending, Completed
+        self.priority = priority
+        self.status = status
         
     def StatusComplete(self):
         self.status = "completed"
@@ -35,5 +35,33 @@ class TaskManager:
                 print("no Tasks found")
             else:
                 for task in self.TaskList:
-                    if task.name == name:
                         print(task)
+                        
+        def markTaskComplete(self,name,status):
+            if not self.TaskList:
+                print("task not found")
+            else:
+                for task in self.TaskList:
+                    if task.name == task:
+                        task.StatusComplete()
+                        print("task marked as complete")
+                    break
+        
+        def GetTask(self, name):
+            for task in self.TaskList:
+                if name == task:
+                    return task
+                return None
+            
+        def SaveTaskToTxt(self, TaskList):
+            with open("tasks.txt", "w") as file:
+                for task in TaskList:
+                    file.write(f"Task: {task.name}\n")
+                    file.write(f"Due Date: {task.due_date}\n")
+                    file.write(f"Reminder Time: {task.reminder_time}\n")
+                    file.write(f"Priority: {task.priority}\n")
+                    file.write(f"Status: {task.status}\n")
+                    file.write(f"Description: {task.description}\n")
+                    file.write("-----\n") 
+            
+                
