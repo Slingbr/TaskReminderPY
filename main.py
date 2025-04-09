@@ -1,5 +1,6 @@
-from datetime import datetime
+import threading
 from task_manager import TaskMethods
+from reminder import ReminderService
 
 def display_menu():
     print("\n--- Task Manager ---")
@@ -11,16 +12,16 @@ def display_menu():
     print("6. Load tasks from file")
     print("7. Exit")
 
-def get_date_input(prompt):
-    while True:
-        date_input = input(prompt)
-        try:
-            return datetime.strptime(date_input, "%Y-%m-%d").date()
-        except ValueError:
-            print("Invalid format. Please use YYYY-MM-DD.")
-
 def main():
     task_methods = TaskMethods()
+    
+
+    reminder_service = ReminderService(task_methods)
+
+
+    reminder_thread = threading.Thread(target=reminder_service.start_reminder_check)
+    reminder_thread.daemon = True
+    reminder_thread.start()
 
     while True:
         display_menu()
@@ -29,7 +30,7 @@ def main():
         if choice == "1":
             name = input("Task name: ")
             due_date = input("Due date (YYYY-MM-DD): ")
-            reminder_time = input("Reminder time (e.g., 14:00): ")
+            reminder_time = input("Reminder time (HH:MM, 24-hour format): ")
             description = input("Description (optional): ")
             priority = input("Priority (Low, Medium, High): ")
             status = "Pending"
